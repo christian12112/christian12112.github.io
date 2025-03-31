@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canserbero | Legado Inmortal</title>
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #e63946;
+            --text: #f1faee;
+            --accent: #a8dadc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i1.wp.com/www.warreport.com.ve/wp-content/uploads/2015/01/canserbero.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            border: 3px solid var(--secondary);
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 30px;
+            background-color: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            z-index: 100;
+        }
+        
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .nav a:hover {
+            color: var(--secondary);
+        }
+        
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--secondary);
+            text-align: center;
+            position: relative;
+        }
+        
+        h2::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary);
+            margin: 15px auto;
+        }
+        
+        .bio {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .bio-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .bio-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+        
+        .bio-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .bio-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .bio-text p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .discografia {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .album {
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .album:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        .album-cover {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .album-info {
+            padding: 20px;
+        }
+        
+        .album-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .album-year {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .album-tracks {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+        
+        .videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .video {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .lyrics-container {
+            background-color: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            line-height: 2;
+            font-family: 'Courier New', Courier, monospace;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .lyrics-container h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .lyrics-section {
+            margin-bottom: 30px;
+        }
+        
+        .lyrics-section-title {
+            color: var(--accent);
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #000;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            border-top: 1px solid #333;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .social-icons a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .back-to-top:hover {
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .discografia {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .nav a {
+                margin: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#biografia">Biografía</a>
+        <a href="#discografia">Discografía</a>
+        <a href="#videos">Videos</a>
+        <a href="#letras">Letras</a>
+    </nav>
+    
+    <header id="inicio">
+        <img src="https://i.pinimg.com/736x/9c/0a/0c/9c0a0c6c5d5d5c5c5c5c5c5c5c5c5c5.jpg" alt="Canserbero" class="logo">
+        <h1>CANSERBERO</h1>
+        <p class="subtitle">"El poeta del rap venezolano cuya música trascendió fronteras y cuyo legado permanece inmortal"</p>
+    </header>
+    
+    <section id="biografia">
+        <h2>BIOGRAFÍA</h2>
+        <div class="bio">
+            <div class="bio-img">
+                <img src="https://www.lahiguera.net/musicalia/artistas/canserbero/fotos/32294/canserbero.jpg" alt="Canserbero">
+            </div>
+            <div class="bio-text">
+                <p>
+                    Tirone José González Orama (11 de marzo de 1988 - 20 de enero de 2015), conocido artísticamente como Canserbero, fue un rapero, compositor y activista venezolano nacido en Caracas. Considerado uno de los más grandes exponentes del rap en español, su música trascendió fronteras gracias a sus profundas letras cargadas de contenido social, filosófico y existencial.
+                </p>
+                <p>
+                    Canserbero (nombre que proviene de Cancerbero, el perro guardián del inframundo en la mitología griega) comenzó su carrera musical en el grupo "Códigos de Barrio" junto a Apache. Más tarde se consolidó como solista con álbumes que se convertirían en clásicos del género como "Vida" (2010) y "Muerte" (2012), obras conceptuales que exploran temas como la injusticia social, la corrupción, la violencia y la búsqueda de significado en la vida.
+                </p>
+                <p>
+                    Su estilo único combinaba flow técnico con letras profundas y mensajes contundentes. Temas como "Es épico", "Pensando en ti", "Jeremías 17-5" y "Mañana será otro día" se convirtieron en himnos para una generación.
+                </p>
+                <p>
+                    Su trágica y misteriosa muerte a los 26 años en Maracay lo convirtió en una leyenda de la música urbana latinoamericana. Aunque su vida fue corta, su legado continúa inspirando a nuevas generaciones de artistas y fans que encuentran en su música reflexiones atemporales sobre la condición humana.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="discografia">
+        <h2>DISCOGRAFÍA</h2>
+        <div class="discografia">
+            <div class="album">
+                <img src="https://images.genius.com/9c0a0c6c5d5d5c5c5c5c5c5c5c5c5c5.1000x1000x1.jpg" alt="Vida" class="album-cover">
+                <div class="album-info">
+                    <h3 class="album-title">Vida</h3>
+                    <p class="album-year">2010</p>
+                    <div class="album-tracks">
+                        <p>1. Intro (Vida)</p>
+                        <p>2. Es Épico</p>
+                        <p>3. C'est la Mort</p>
+                        <p>4. Y Lejos...</p>
+                        <p>5. En la Oscuridad</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="album">
+                <img src="https://images.genius.com/9c0a0c6c5d5d5c5c5c5c5c5c5c5c5c5.1000x1000x1.jpg" alt="Muerte" class="album-cover">
+                <div class="album-info">
+                    <h3 class="album-title">Muerte</h3>
+                    <p class="album-year">2012</p>
+                    <div class="album-tracks">
+                        <p>1. Intro (Muerte)</p>
+                        <p>2. Mañana será otro día</p>
+                        <p>3. Jeremías 17-5</p>
+                        <p>4. Querer Querernos</p>
+                        <p>5. Mundo de Piedra</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="album">
+                <img src="https://images.genius.com/9c0a0c6c5d5d5c5c5c5c5c5c5c5c5c5.1000x1000x1.jpg" alt="Can+Zoo Índigos" class="album-cover">
+                <div class="album-info">
+                    <h3 class="album-title">Can+Zoo Índigos</h3>
+                    <p class="album-year">2008</p>
+                    <div class="album-tracks">
+                        <p>1. Intro</p>
+                        <p>2. Demoslo Vuelta</p>
+                        <p>3. Solo Para Ti</p>
+                        <p>4. Aprendiz</p>
+                        <p>5. La Primera</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="album">
+                <img src="https://images.genius.com/9c0a0c6c5d5d5c5c5c5c5c5c5c5c5c5.1000x1000x1.jpg" alt="Nuestra Doctrina No Es un Dogma..." class="album-cover">
+                <div class="album-info">
+                    <h3 class="album-title">Nuestra Doctrina No Es un Dogma...</h3>
+                    <p class="album-year">2005</p>
+                    <div class="album-tracks">
+                        <p>1. Intro</p>
+                        <p>2. El Primer Dogma</p>
+                        <p>3. La Verdad</p>
+                        <p>4. Sin Salida</p>
+                        <p>5. El Último Dogma</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="album">
+                <img src="https://images.genius.com/9c0a0c6c5d5d5c5c5c5c5c5c5c5c5c5.1000x1000x1.jpg" alt="Guía para la Acción" class="album-cover">
+                <div class="album-info">
+                    <h3 class="album-title">Guía para la Acción</h3>
+                    <p class="album-year">2006</p>
+                    <div class="album-tracks">
+                        <p>1. Intro</p>
+                        <p>2. La Guía</p>
+                        <p>3. El Camino</p>
+                        <p>4. La Acción</p>
+                        <p>5. El Final</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="videos">
+        <h2>VIDEOS DESTACADOS</h2>
+        <div class="videos">
+            <div class="video">
+                <iframe src="https://www.youtube.com/embed/9c0a0c6c5d5d" allowfullscreen></iframe>
+            </div>
+            
+            <div class="video">
+                <iframe src="https://www.youtube.com/embed/9c0a0c6c5d5d" allowfullscreen></iframe>
+            </div>
+            
+            <div class="video">
+                <iframe src="https://www.youtube.com/embed/9c0a0c6c5d5d" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    
+    <section id="letras">
+        <h2>LETRAS DESTACADAS</h2>
+        <div class="lyrics-container">
+            <h3>Es Épico</h3>
+            
+            <div class="lyrics-section">
+                <p class="lyrics-section-title">[Intro]</p>
+                <p>Oh, me falta el aire (me falta el aire)</p>
+                <p>Y el corazón tucum-tucum-tucum</p>
+                <p>Hoy va a correr sangre (va a correr sangre)</p>
+                <p>Ya sé por dónde se mueve ese bum</p>
+            </div>
+            
+            <div class="lyrics-section">
+                <p class="lyrics-section-title">[Verso 1]</p>
+                <p>Hoy voy a convertirme en un criminal, ya no creo en nadie</p>
+                <p>A menos que me convierta en un muerto</p>
+                <p>Hoy voy a vengar a mi hermano, como le juré a mi padre</p>
+                <p>Diente por diente, ojo por ojo, es esto</p>
+                <p>Una bicha prestada, porque no soy hampa</p>
+                <p>Pero la rabia que siento no escampa, es tanta que me ahoga</p>
+                <p>Nunca había güelido droga, pero ahora es necesario</p>
+                <p>Pa cumplir con lo que el corazón me implora</p>
+                <p>Siento que se me sale el tórax, la moto a cien por hora</p>
+                <p>Pelo por la bicha y le grito: "¿Y ahora?"</p>
+                <p>Todo pasa muy chola, en ráfagas descargo a todo' esos malandros</p>
+                <p>Hasta que ya no escupe la pistola</p>
+            </div>
+            
+            <div class="lyrics-section">
+                <p class="lyrics-section-title">[Coro]</p>
+                <p>Y el corazón tucum-tucum, tucum-tucum</p>
+                <p>Y las balas pacaum-pacaum, pacaum-pacaum</p>
+                <p>Y el corazón tucum-tucum, tucum-tucum</p>
+                <p>Y las balas pacaum-pacaum, pacaum, ey</p>
+            </div>
+            
+            <div class="lyrics-section">
+                <p class="lyrics-section-title">[Verso 2]</p>
+                <p>Lloro de la arrechera, mientras en la acera caigo</p>
+                <p>Escucho a una señora que grita que mataron a Carlos</p>
+                <p>Solo ahí fue cuando sonreí aliviado, porque Carlos</p>
+                <p>Fue el bastardo que mató a mi hermano</p>
+                <p>Todo es confuso, escucho: "Wiu, wiu, wiu"</p>
+                <p>No veo bien y siento frío, frío, frío</p>
+                <p>Un tipo gritando: "¡El mío, el mío, el mío!"</p>
+                <p>Hasta que ya no escuché na más que un profundo silencio</p>
+            </div>
+            
+            <!-- Continúa con el resto de la letra... -->
+            
+        </div>
+    </section>
+    
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.youtube.com/c/CanserberoOficial" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://open.spotify.com/artist/1wGIhYkKWSq4yACtTkCkSX" target="_blank"><i class="fab fa-spotify"></i></a>
+            <a href="https://www.instagram.com/canserbero/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/canserbero" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>© 2023 Legado de Canserbero. Todos los derechos reservados.</p>
+        <p>Sitio creado por fans para honrar su memoria.</p>
+        <a href="#inicio" class="back-to-top">Volver arriba <i class="fas fa-arrow-up"></i></a>
+    </footer>
+    
+    <script>
+        // Smooth scrolling para los enlaces del menú
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Cambiar el header al hacer scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition > 100) {
+                header.style.backgroundPosition = 'center ' + (-scrollPosition * 0.5) + 'px';
+            }
+        });
+        
+        // Efecto de carga
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.opacity = '1';
+            document.body.style.transition = 'opacity 0.5s ease-in';
+        });
+    </script>
+</body>
+</html>               
